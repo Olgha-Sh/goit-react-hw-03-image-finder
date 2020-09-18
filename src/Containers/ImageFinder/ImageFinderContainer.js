@@ -1,21 +1,21 @@
-import React, { useState } from "react";
-import ImageFinder from "../../Components/ImageFinder/ImageFinder";
-import axios from "../../helpers/axios";
-import builderURL from "../../helpers/builderURL";
-import scrollTo from "../../hooks/scrollTo";
+import React, { useState } from 'react';
+import ImageFinder from '../../Components/ImageFinder/ImageFinder';
+import axios from '../../helpers/axios';
+import builderURL from '../../helpers/builderURL';
+import scrollTo from '../../hooks/scrollTo';
 
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 toast.configure();
 
-const ImageFinderContainer = (props) => {
-  const [query, setQuery] = useState("");
-  const [value, setValue] = useState("");
+const ImageFinderContainer = props => {
+  const [query, setQuery] = useState('');
+  const [value, setValue] = useState('');
   const [imagesCollection, setImagesCollection] = useState([]);
   const [error, setError] = useState(false);
   const [numberPage, setNumberPage] = useState(1);
   const [loader, setLoader] = useState(false);
-  const [modalWindow, setModalWindow] = useState({ url: "", alt: "" });
+  const [modalWindow, setModalWindow] = useState({ url: '', alt: '' });
   const [isModal, setIsModal] = useState(false);
 
   const requestMoreImages = async (value, page = 1, prevValue) => {
@@ -29,8 +29,8 @@ const ImageFinderContainer = (props) => {
     try {
       const response = await axios.get(
         builderURL(
-          `q=${value}&page=${page}&image_type=photo&orientation=horizontal&per_page=12`
-        )
+          `q=${value}&page=${page}&image_type=photo&orientation=horizontal&per_page=12`,
+        ),
       );
       conditionalFillingList(prevValue, value, response.data.hits);
     } catch (error) {
@@ -69,7 +69,7 @@ const ImageFinderContainer = (props) => {
     setModalWindow({ url: image, alt: caption });
     setIsModal(true);
   };
-  const closeModal = (isModal) => {
+  const closeModal = isModal => {
     setIsModal(!isModal);
   };
 
